@@ -8,13 +8,13 @@ npm install
 ```
 
 ## Environment Variable
-Setup your environment variable inside `.env` file for development, dan `.env.production`. Create a file environment in the root folder.
+Setup your environment variable inside `.env` file for development, and `.env.production` for production. Create a file environment in the root folder.
 
 `.env` for the local environment :
 ```
 VUE_APP_ROOT_API=http://localhost:5000
 ```
-`.env.production` for the local environment :
+`.env.production` for production environment :
 ```
 VUE_APP_ROOT_API=http://rsa.ignatha.site
 ```
