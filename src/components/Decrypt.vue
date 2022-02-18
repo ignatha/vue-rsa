@@ -9,30 +9,30 @@
 					<h4 class="my-0 fw-normal">Decrypt</h4>
 				</div>
 				<div class="card-body">
-					<form>
 						<div class="panel-body">
-							<div class="form-group col-md-12">
-								<label>Private Key (D)</label>
+							<label>Private Key</label>
+							<div class="input-group mb-3 col-md-12">
 								<input type="text" v-model="private_key" @change="decryptData" class="key_dec form-control">
 							</div>
-							<div class="form-group col-md-12">
-								<label>Nilai N</label>
-								<input type="text" v-model="nilai_n_decrypt" @change="decryptData" class="key_dec form-control">
-							</div>
-							<div class="form-group col-md-12">
-								<label>Ciphertext</label>
+							<label>Ciphertext</label>
+							<div class="input-group mb-3 col-md-12">
 								<textarea v-model="cipher_text" rows="10" @change="decryptData" class="key_dec form-control"></textarea>
 							</div>
-							<div class="form-group col-md-12">
-								<label>Plaint Text ASCII</label>
+							<label>Plaint Text ASCII</label>
+							<div class="input-group mb-3 col-md-12">
 								<textarea v-model="plain_text_ascii_decrypt" rows="10" class="form-control" readonly></textarea>
 							</div>
-							<div class="form-group col-md-12">
-								<label>Plaintext</label>
+							<div class="input-group mb-3 col-md-12">
+								<b-button variant="outline-dark" v-b-tooltip.focus title="Copy!" v-clipboard="plain_text_ascii_decrypt">Copy!</b-button>
+							</div>
+							<label>Plaintext</label>
+							<div class="input-group mb-3 col-md-12">
 								<textarea v-model="plain_text_decrypt" rows="10" class="form-control" readonly></textarea>
 							</div>
+							<div class="input-group mb-3 col-md-12">
+								<b-button variant="outline-dark" v-b-tooltip.focus title="Copy!" v-clipboard="plain_text_decrypt">Copy!</b-button>
+							</div>
 						</div>
-					</form>
 				</div>
 			</div>
 		</div>
@@ -51,7 +51,6 @@ export default {
 	data(){
 		return {
 			private_key:null,
-			nilai_n_decrypt:null,
 			cipher_text:null,
 			plain_text_ascii_decrypt:null,
 			plain_text_decrypt:null
@@ -59,12 +58,11 @@ export default {
 	},
 	methods: {
 		decryptData() {
-			if (!this.private_key || !this.nilai_n_decrypt || !this.cipher_text ) {
+			if (!this.private_key || !this.cipher_text ) {
 				return;
 			}else{
 				let form = new FormData();
 				form.append('private_key',this.private_key);
-				form.append('nilai_n_decrypt',this.nilai_n_decrypt);
 				form.append('cipher_text',this.cipher_text);
 				
 				axios.post(process.env.VUE_APP_ROOT_API+'/decrypt', form)

@@ -9,30 +9,30 @@
 					<h4 class="my-0 fw-normal">Encrypt</h4>
 				</div>
 				<div class="card-body">
-					<form>
 						<div class="panel-body">
-							<div class="form-group col-md-12">
-								<label>Public Key (E)</label>
+							<label>Public Key</label>
+							<div class="input-group mb-3 col-md-12">
 								<input type="text" v-model="public_key" @change="encryptData" class="key form-control">
 							</div>
-							<div class="form-group col-md-12">
-								<label>Nilai N</label>
-								<input type="text" v-model="nilai_n" @change="encryptData" class="key form-control">
-							</div>
-							<div class="form-group col-md-12">
-								<label>Plain Text</label>
+							<label>Plain Text</label>
+							<div class="input-group mb-3 col-md-12">
 								<textarea v-model="plain_text" rows="10" @change="encryptData" class="key form-control"></textarea>
 							</div>
-							<div class="form-group col-md-12">
-								<label>Plaint Text ASCII</label>
+							<label>Plaint Text ASCII</label>
+							<div class="input-group mb-3 col-md-12">
 								<textarea v-model="plain_text_ascii" rows="10" class="form-control" readonly></textarea>
 							</div>
-							<div class="form-group col-md-12">
-								<label>Ciphertext</label>
+							<div class="input-group mb-3 col-md-12">
+								<b-button variant="outline-dark" v-b-tooltip.focus title="Copy!" v-clipboard="plain_text_ascii">Copy!</b-button>
+							</div>
+							<label>Ciphertext</label>
+							<div class="input-group mb-3 col-md-12">
 								<textarea v-model="decrypt" rows="10" class="form-control" readonly></textarea>
 							</div>
+							<div class="input-group mb-3 col-md-12">
+								<b-button variant="outline-dark" v-b-tooltip.focus title="Copy!" v-clipboard="decrypt">Copy!</b-button>
+							</div>
 						</div>
-					</form>
 				</div>
 			</div>
 		</div>
@@ -51,7 +51,6 @@ export default {
 	data(){
 		return {
 			public_key:null,
-			nilai_n:null,
 			plain_text:null,
 			plain_text_ascii:null,
 			decrypt:null
@@ -59,12 +58,11 @@ export default {
 	},
 	methods: {
 		encryptData() {
-			if (!this.public_key || !this.nilai_n || !this.plain_text ) {
+			if (!this.public_key || !this.plain_text ) {
 				return;
 			}else{
 				let form = new FormData();
 				form.append('public_key',this.public_key);
-				form.append('nilai_n',this.nilai_n);
 				form.append('plain_text',this.plain_text);
 				
 				axios.post(process.env.VUE_APP_ROOT_API+'/enkripsi', form)
