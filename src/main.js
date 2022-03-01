@@ -1,15 +1,29 @@
-import { createApp } from 'vue'
+import Vue from 'vue'
 import App from './App.vue'
-import BootstrapVue3 from 'bootstrap-vue-3'
-import 'bootstrap'
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue-3/dist/bootstrap-vue-3.css'
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import VueClipboard from 'vue-clipboard2'
+import VueRouter from 'vue-router'
 import router from './routers'
-import { VueClipboard } from '@soerenmartius/vue3-clipboard'
+import store from './store';
+import VeeValidate from 'vee-validate';
+import Vuex from 'vuex';
 
-const app = createApp(App)
-app.use(router)
-app.use(BootstrapVue3)
-app.use(VueClipboard)
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
-app.mount('#app')
+
+Vue.config.productionTip = false
+
+Vue.use(VeeValidate);
+Vue.use(Vuex);
+Vue.use(BootstrapVue)
+Vue.use(IconsPlugin)
+Vue.use(VueClipboard)
+Vue.use(VueRouter)
+
+
+new Vue({
+  router,
+  store,
+  render: h => h(App)
+}).$mount('#app')
